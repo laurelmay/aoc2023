@@ -2,14 +2,18 @@ package com.kylelaker.aoc2023;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.StringReader;
+import java.nio.Buffer;
 import java.io.Reader;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
+
+import org.springframework.beans.factory.parsing.Problem;
 
 public class ProblemInput {
   private final String input;
@@ -39,7 +43,11 @@ public class ProblemInput {
   }
 
   public static ProblemInput fromSystemIn() {
-    try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
+    return ProblemInput.fromInputStream(System.in);
+  }
+
+  public static ProblemInput fromInputStream(InputStream stream) {
+    try (BufferedReader reader = new BufferedReader(new InputStreamReader(stream))) {
       return new ProblemInput(reader.lines());
     } catch (IOException e) {
       return null;
