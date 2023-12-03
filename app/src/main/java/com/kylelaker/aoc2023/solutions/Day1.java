@@ -7,7 +7,7 @@ import com.kylelaker.aoc2023.annotations.Part;
 import java.util.List;
 import java.util.Map;
 
-@Day(number = 1)
+@Day(1)
 public class Day1 {
     private record IntLoc(Map.Entry<String, Integer> item, int location) {
     }
@@ -24,7 +24,7 @@ public class Day1 {
             "nine", 9
     );
 
-    @Part(number = 1)
+    @Part(1)
     public int part1(ProblemInput input) {
         return input.asTransformedLines((line) -> {
             List<String> digits = line.chars().filter(c -> Character.isDigit(c)).<String>mapToObj(c -> Character.toString(c)).toList();
@@ -32,7 +32,7 @@ public class Day1 {
         }).stream().reduce(0, Integer::sum);
     }
 
-    @Part(number = 2)
+    @Part(2)
     public int part2(ProblemInput input) {
         return input.asLines()
                 .stream()

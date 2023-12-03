@@ -14,7 +14,7 @@ public class SolutionFinder {
     public static Collection<Class<?>> findDay(int number) {
         var scanner = new ClassPathScanningCandidateComponentProvider(false);
         scanner.addIncludeFilter(new AnnotationTypeFilter(Day.class));
-        return scanner.findCandidateComponents("com.kylelaker.aoc2023.solutions")
+        return scanner.findCandidateComponents(SolutionFinder.class.getPackageName())
                 .stream()
                 .map(BeanDefinition::getBeanClassName)
                 .<Class<?>>mapMulti((name, consumer) -> {
@@ -24,7 +24,7 @@ public class SolutionFinder {
                         // Do nothing (don't accept the value)
                     }
                 })
-                .filter(clazz -> clazz.getAnnotation(Day.class).number() == number)
+                .filter(clazz -> clazz.getAnnotation(Day.class).value() == number)
                 .toList();
     }
 
@@ -32,7 +32,7 @@ public class SolutionFinder {
         Method[] methods = solver.getDeclaredMethods();
         for (Method method : methods) {
             Part annot = method.getAnnotation(Part.class);
-            if (annot != null && annot.number() == number) {
+            if (annot != null && annot.value() == number) {
                 return Optional.of(method);
             }
         }

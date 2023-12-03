@@ -58,6 +58,7 @@ public class ProblemInput {
     }
 
     /**
+     * Returns the input as a grid of 1-character Strings.
      */
     public String[][] asGrid() {
         List<String> lines = List.copyOf(this.asLines());
@@ -66,6 +67,17 @@ public class ProblemInput {
 
         for (int i = 0; i < lines.size(); i++) {
             grid[i] = lines.get(i).split("");
+        }
+        return grid;
+    }
+
+    public char[][] asCharGrid() {
+        List<String> lines = List.copyOf(this.asLines());
+        int size = lines.size();
+        char[][] grid = new char[size][size];
+
+        for (int i = 0; i < lines.size(); i++) {
+            grid[i] = lines.get(i).toCharArray();
         }
         return grid;
     }

@@ -20,7 +20,7 @@ class Day1Test {
         File inputFile = new File(getClass().getClassLoader().getResource("inputs/1a.txt").getFile());
         ProblemInput input = ProblemInput.fromInputStream(new FileInputStream(inputFile));
         // THEN
-        assertEquals(solver.part1(input), 142);
+        assertEquals(142, solver.part1(input));
     }
 
     @Test
@@ -31,7 +31,7 @@ class Day1Test {
         File inputFile = new File(getClass().getClassLoader().getResource("inputs/1b.txt").getFile());
         ProblemInput input = ProblemInput.fromInputStream(new FileInputStream(inputFile));
         // THEN
-        assertEquals(solver.part2(input), 281);
+        assertEquals(281, solver.part2(input));
 
     }
 }

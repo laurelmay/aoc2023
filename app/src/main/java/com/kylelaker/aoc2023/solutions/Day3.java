@@ -5,11 +5,9 @@ import com.kylelaker.aoc2023.annotations.Day;
 import com.kylelaker.aoc2023.annotations.Part;
 
 import java.util.*;
-import java.util.function.Function;
-import java.util.stream.Stream;
 import java.util.stream.IntStream;
 
-@Day(number = 3)
+@Day(3)
 public class Day3 {
 
     public record Index(int row, int col) {}
@@ -49,7 +47,7 @@ public class Day3 {
 
     public record SchematicData(SequencedCollection<NumberAtLocation> numbers, SequencedCollection<SymbolLocation> symbols) {}
 
-    private SchematicData parseSchematic(String[][] schematic) {
+    private SchematicData parseSchematic(char[][] schematic) {
         List<NumberAtLocation> numbers = new ArrayList<>();
         List<SymbolLocation> symbols = new ArrayList<>();
         for (int row = 0; row < schematic.length; row++) {
@@ -57,7 +55,7 @@ public class Day3 {
             Index numberStart = null;
             Index numberEnd = null;
             for (int col = 0; col < schematic.length; col++) {
-                char character = schematic[row][col].charAt(0);
+                char character = schematic[row][col];
                 if (Character.isDigit(character)) {
                     numberBuffer *= 10;
                     numberBuffer += Character.getNumericValue(character);
@@ -81,9 +79,9 @@ public class Day3 {
         return new SchematicData(numbers, symbols);
     }
 
-    @Part(number = 1)
+    @Part(1)
     public int part1(ProblemInput input) {
-        SchematicData schematic = parseSchematic(input.asGrid());
+        SchematicData schematic = parseSchematic(input.asCharGrid());
         SequencedCollection<NumberAtLocation> numbers = schematic.numbers();
         SequencedCollection<SymbolLocation> symbols = schematic.symbols();
         SequencedCollection<NumberAtLocation> partNumbers = numbers.stream()
@@ -92,9 +90,9 @@ public class Day3 {
         return partNumbers.stream().mapToInt(NumberAtLocation::value).reduce(0, Integer::sum);
     }
 
-    @Part(number = 2)
+    @Part(2)
     public int part2(ProblemInput input) {
-        SchematicData schematic = parseSchematic(input.asGrid());
+        SchematicData schematic = parseSchematic(input.asCharGrid());
         SequencedCollection<NumberAtLocation> numbers = schematic.numbers();
         SequencedCollection<SymbolLocation> symbols = schematic.symbols();
 

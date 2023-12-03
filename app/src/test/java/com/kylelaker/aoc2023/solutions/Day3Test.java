@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -21,7 +20,7 @@ class Day3Test {
         File inputFile = new File(getClass().getClassLoader().getResource("inputs/3a.txt").getFile());
         ProblemInput input = ProblemInput.fromInputStream(new FileInputStream(inputFile));
         // THEN
-        assertEquals(solver.part1(input), 4361);
+        assertEquals(4361, solver.part1(input));
     }
 
     @Test
@@ -32,6 +31,6 @@ class Day3Test {
         File inputFile = new File(getClass().getClassLoader().getResource("inputs/3a.txt").getFile());
         ProblemInput input = ProblemInput.fromInputStream(new FileInputStream(inputFile));
         // THEN
-        assertEquals(solver.part2(input), 467835);
+        assertEquals(467835, solver.part2(input));
     }
 }

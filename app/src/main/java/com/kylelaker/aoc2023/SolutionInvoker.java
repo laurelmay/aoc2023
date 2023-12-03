@@ -32,7 +32,7 @@ public class SolutionInvoker {
                 } else {
                     throw new IllegalArgumentException("Unsupported input parameter type: " + inputType);
                 }
-                System.out.println("Part " + part.number() + ": " + returnValue);
+                System.out.println("Part " + part.value() + ": " + returnValue);
             }
         } catch (ReflectiveOperationException e) {
             System.err.println("Unable to invoke the solution for " + solver.getName());

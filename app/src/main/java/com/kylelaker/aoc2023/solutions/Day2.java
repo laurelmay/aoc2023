@@ -8,7 +8,7 @@ import java.util.*;
 import java.util.function.Function;
 
 
-@Day(number = 2)
+@Day(2)
 public class Day2 {
     public final record CubeCount(int count, CubeColor color) {}
     public final record CubeSet(Map<CubeColor, Integer> counts) {}
@@ -35,7 +35,7 @@ public class Day2 {
 
     });
 
-    @Part(number = 1)
+    @Part(1)
     public int part1(ProblemInput input) {
         SequencedCollection<Game> games = input.asTransformedLines(GAME_PARSER);
         return games.stream().filter((game) -> game.sets().stream()
@@ -46,7 +46,7 @@ public class Day2 {
                 .reduce(0, Integer::sum);
     }
 
-    @Part(number = 2)
+    @Part(2)
     public int part2(ProblemInput input) {
         SequencedCollection<Game> games = input.asTransformedLines(GAME_PARSER);
         return games.stream()
