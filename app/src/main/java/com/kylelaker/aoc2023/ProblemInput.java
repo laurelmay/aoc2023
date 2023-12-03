@@ -1,56 +1,94 @@
 package com.kylelaker.aoc2023;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.StringReader;
-import java.nio.Buffer;
-import java.io.Reader;
+import java.io.*;
 import java.util.Arrays;
 import java.util.List;
+import java.util.SequencedCollection;
 import java.util.function.Function;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-import org.springframework.beans.factory.parsing.Problem;
-
+/**
+ * Utilities for handling Advent of Code inputs.
+ */
 public class ProblemInput {
-  private final String input;
+    private final String input;
 
-  private ProblemInput(Stream<String> lines) {
-    this.input = String.join("\n", lines.toList());
-  }
-
-  public String asString() {
-    return this.input;
-  }
-
-  public List<String> asLines() {
-    return Arrays.asList(this.input.split("\n"));
-  }
-
-  public <T> List<T> asTransformedLines(Function<String, T> function) {
-    return this.asLines().stream().map(function).toList();
-  }
-
-  public IntStream asLinesOfNumbers() {
-    return this.asLines().stream().mapToInt(Integer::parseInt);
-  }
-
-  public Reader asReader() {
-    return new StringReader(this.input);
-  }
-
-  public static ProblemInput fromSystemIn() {
-    return ProblemInput.fromInputStream(System.in);
-  }
-
-  public static ProblemInput fromInputStream(InputStream stream) {
-    try (BufferedReader reader = new BufferedReader(new InputStreamReader(stream))) {
-      return new ProblemInput(reader.lines());
-    } catch (IOException e) {
-      return null;
+    private ProblemInput(Stream<String> lines) {
+        this.input = String.join("\n", lines.toList());
     }
-  }
+
+    /**
+     * Get the input as a single string.
+     */
+    public String asString() {
+        return this.input;
+    }
+
+    /**
+     * Get the input as individual lines.
+     * <p>
+     * The list returned is unmodifiable.
+     */
+    public SequencedCollection<String> asLines() {
+        return List.copyOf(Arrays.asList(this.input.split("\n")));
+    }
+
+    /**
+     * Apply a transformation to lines of the input.
+     *
+     * @param function - the transformation to apply to each line
+     */
+    public <T> SequencedCollection<T> asTransformedLines(Function<String, T> function) {
+        return this.asLines().stream().map(function).toList();
+    }
+
+    /**
+     * Parse each line as an integer.
+     */
+    public IntStream asLinesOfNumbers() {
+        return this.asLines().stream().mapToInt(Integer::parseInt);
+    }
+
+    /**
+     * Get the input as a Reader.
+     */
+    public Reader asReader() {
+        return new StringReader(this.input);
+    }
+
+    /**
+     */
+    public String[][] asGrid() {
+        List<String> lines = List.copyOf(this.asLines());
+        int size = lines.size();
+        String[][] grid = new String[size][size];
+
+        for (int i = 0; i < lines.size(); i++) {
+            grid[i] = lines.get(i).split("");
+        }
+        return grid;
+    }
+
+    /**
+     * Build the input utility from {@link System.in}.
+     */
+    public static ProblemInput fromSystemIn() {
+        return ProblemInput.fromInputStream(System.in);
+    }
+
+    /**
+     * Build the input utility from a generic input stream.
+     * <p>
+     * This method will close the given input stream.
+     *
+     * @param stream - the {@link InputStream} to read from
+     */
+    public static ProblemInput fromInputStream(InputStream stream) {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(stream))) {
+            return new ProblemInput(reader.lines());
+        } catch (IOException e) {
+            return null;
+        }
+    }
 }

@@ -8,30 +8,30 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class Day1Test {
+class Day3Test {
     @Test
-    void day1SolvesPart1() throws Exception {
+    void day3SolvesPart1() throws Exception {
         // GIVEN
-        Day1 solver = new Day1();
+        Day3 solver = new Day3();
         // WHEN
-        File inputFile = new File(getClass().getClassLoader().getResource("inputs/1a.txt").getFile());
+        File inputFile = new File(getClass().getClassLoader().getResource("inputs/3a.txt").getFile());
         ProblemInput input = ProblemInput.fromInputStream(new FileInputStream(inputFile));
         // THEN
-        assertEquals(solver.part1(input), 142);
+        assertEquals(solver.part1(input), 4361);
     }
 
     @Test
-    void day1SovesPart2SampleInput() throws Exception {
+    void day3SovesPart2SampleInput() throws Exception {
         // GIVEN
-        Day1 solver = new Day1();
+        Day3 solver = new Day3();
         // WHEN
-        File inputFile = new File(getClass().getClassLoader().getResource("inputs/1b.txt").getFile());
+        File inputFile = new File(getClass().getClassLoader().getResource("inputs/3a.txt").getFile());
         ProblemInput input = ProblemInput.fromInputStream(new FileInputStream(inputFile));
         // THEN
-        assertEquals(solver.part2(input), 281);
-
+        assertEquals(solver.part2(input), 467835);
     }
 }

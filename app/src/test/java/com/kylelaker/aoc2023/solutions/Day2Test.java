@@ -3,46 +3,50 @@
  */
 package com.kylelaker.aoc2023.solutions;
 
+import com.kylelaker.aoc2023.ProblemInput;
+import org.junit.jupiter.api.Test;
+
 import java.io.File;
 import java.io.FileInputStream;
+import java.util.List;
 
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
-
-
-import com.kylelaker.aoc2023.ProblemInput;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class Day2Test {
-    @Test void day2GameParser() throws Exception {
+    @Test
+    void day2GameParser() throws Exception {
         // GIVEN
         var parser = Day2.GAME_PARSER;
         // WHEN
         File inputFile = new File(getClass().getClassLoader().getResource("inputs/2a.txt").getFile());
         ProblemInput input = ProblemInput.fromInputStream(new FileInputStream(inputFile));
         var result = input.asTransformedLines(parser);
-        var first = result.get(0);
+        var first = result.getFirst();
         // THEN
         assertEquals(first.id(), 1);
         assertEquals(first.sets().size(), 3);
         assertEquals(result.size(), 5);
     }
-    @Test void day2SolvesPart1() throws Exception {
+
+    @Test
+    void day2SolvesPart1() throws Exception {
         // GIVEN
         Day2 solver = new Day2();
         // WHEN
         File inputFile = new File(getClass().getClassLoader().getResource("inputs/2a.txt").getFile());
         ProblemInput input = ProblemInput.fromInputStream(new FileInputStream(inputFile));
         // THEN
-        assertEquals(solver.part1(input), "8");
+        assertEquals(solver.part1(input), 8);
     }
 
-    @Test void day2SovesPart2SampleInput() throws Exception {
+    @Test
+    void day2SovesPart2SampleInput() throws Exception {
         // GIVEN
         Day2 solver = new Day2();
         // WHEN
         File inputFile = new File(getClass().getClassLoader().getResource("inputs/2a.txt").getFile());
         ProblemInput input = ProblemInput.fromInputStream(new FileInputStream(inputFile));
         // THEN
-        assertEquals(solver.part2(input), "2286");
+        assertEquals(solver.part2(input), 2286);
     }
 }

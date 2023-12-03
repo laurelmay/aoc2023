@@ -28,7 +28,7 @@ dependencies {
 // Apply a specific Java toolchain to ease working on different environments.
 java {
     toolchain {
-        languageVersion.set(JavaLanguageVersion.of(17))
+        languageVersion.set(JavaLanguageVersion.of(21))
     }
 }
 
@@ -44,16 +44,16 @@ tasks.named<Test>("test") {
 
 tasks.jar {
     manifest.attributes["Main-Class"] = "com.kylelaker.aoc2023.Main"
-        val dependencies = configurations
-        .runtimeClasspath
-        .get()
-        .map(::zipTree) // OR .map { zipTree(it) }
+    val dependencies = configurations
+            .runtimeClasspath
+            .get()
+            .map(::zipTree)
     from(dependencies)
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
 
 tasks {
-  withType<JavaCompile> {
-    options.compilerArgs.add("-Xlint:deprecation")
-  }
+    withType<JavaCompile> {
+        options.compilerArgs.add("-Xlint:deprecation")
+    }
 }

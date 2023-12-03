@@ -6,7 +6,8 @@ package com.kylelaker.aoc2023;
 import org.junit.jupiter.api.Test;
 
 class MainTest {
-    @Test void appHasAGreeting() {
+    @Test
+    void appHasAGreeting() {
         Main classUnderTest = new Main();
     }
 }
