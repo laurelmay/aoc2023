@@ -39,7 +39,7 @@ public class Day4 {
             .parallel()
             .map(String::trim)
             .map(Integer::valueOf)
-            .collect(Collectors.toSet());
+            .collect(Collectors.toUnmodifiableSet());
     }
 
     private static ScratchCard parseLine(String line) {
