@@ -17,11 +17,11 @@ public class Day4 {
 
     public record ScratchCard(int number, Set<Integer> winningNumbers, Set<Integer> actualNumbers) {
         public int score() {
-            int common = matches();
-            if (common == 0) {
+            int matches = matches();
+            if (matches == 0) {
                 return 0;
             }
-            return (int) Math.pow(2, common - 1);
+            return (int) Math.pow(2, matches - 1);
         }
         public int matches() {
             Set<Integer> losingNumbers = new HashSet<>(actualNumbers);
@@ -36,6 +36,7 @@ public class Day4 {
 
     private static Set<Integer> numbersToSet(String[] numbers) {
         return Arrays.stream(numbers)
+            .parallel()
             .map(String::trim)
             .map(Integer::valueOf)
             .collect(Collectors.toSet());
@@ -52,10 +53,10 @@ public class Day4 {
 
     @Part(1)
     public int part1(ProblemInput input) {
-        return input.asLines().stream()
+        return input.asLines().parallelStream()
             .map(Day4::parseLine)
             .mapToInt(ScratchCard::score)
-            .reduce(0, Integer::sum);
+            .sum();
     }
 
     @Part(2)
@@ -65,10 +66,11 @@ public class Day4 {
         Map<Integer, Integer> cardCounts = HashMap.newHashMap(originalCards.size());
         originalCards.forEach(card -> cardCounts.put(card.number(), 1));
         originalCards.forEach(card -> {
+            int count = cardCounts.get(card.number());
             for (int i = 1; i <= card.matches(); i++) {
-                cardCounts.computeIfPresent(card.number() + i, (k, v) -> v + cardCounts.get(card.number()));
+                cardCounts.computeIfPresent(card.number() + i, (k, v) -> v + count);
             }
         });
-        return cardCounts.values().stream().mapToInt(Integer::intValue).reduce(0, Integer::sum);
+        return cardCounts.values().parallelStream().reduce(0, Integer::sum);
     }
 }
