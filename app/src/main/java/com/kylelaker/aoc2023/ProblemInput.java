@@ -103,4 +103,20 @@ public class ProblemInput {
             return null;
         }
     }
+
+    private static long[] stringToLongs(String input, String separator) {
+        return Arrays.stream(input.split(separator)).mapToLong(Long::parseLong).toArray();
+    }
+
+    private static int[] stringToInts(String input, String separator) {
+        return Arrays.stream(input.split(separator)).mapToInt(Integer::parseInt).toArray();
+    }
+
+    public static int[] stringToInts(String input) {
+        return stringToInts(input, "\\s+");
+    }
+
+    public static long[] stringToLongs(String input) {
+        return stringToLongs(input, "\\s+");
+    }
 }
