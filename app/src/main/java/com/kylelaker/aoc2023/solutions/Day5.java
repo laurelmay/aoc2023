@@ -17,12 +17,12 @@ public class Day5 {
     public record SeedRange(long start, long length) { }
 
     private long lookup(SequencedCollection<OffsetRange> ranges, AlmanacDataType source, AlmanacDataType dest, long number) {
-        return ranges.stream().parallel()
-        // ranges are [start, start + length). Wasted a lot of time debugging the fact that I used >= here originally.
-        .filter(r -> r.source() == source && r.dest() == dest && r.srcStart() <= number && r.srcStart() + r.range() > number)
-        .findFirst()
-        .map(it -> it.destStart() + (number - it.srcStart()))
-        .orElse(number);
+        return ranges.stream()
+          // ranges are [start, start + length). Wasted a lot of time debugging the fact that I used >= here originally.
+          .filter(r -> r.source() == source && r.dest() == dest && r.srcStart() <= number && r.srcStart() + r.range() > number)
+          .findFirst()
+          .map(it -> it.destStart() + (number - it.srcStart()))
+          .orElse(number);
     }
 
     private long fullLookup(SequencedCollection<OffsetRange> ranges, LongStream seeds) {
