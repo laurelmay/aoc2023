@@ -24,6 +24,17 @@ class Day6Test {
     }
 
     @Test
+    void day6SolvesPart1WithMath() throws Exception {
+        // GIVEN
+        Day6 solver = new Day6();
+        // WHEN
+        File inputFile = new File(getClass().getClassLoader().getResource("inputs/6a.txt").getFile());
+        ProblemInput input = ProblemInput.fromInputStream(new FileInputStream(inputFile));
+        // THEN
+        assertEquals(288, solver.part1WithMath(input));
+    }
+
+    @Test
     void day6SovesPart2SampleInput() throws Exception {
         // GIVEN
         Day6 solver = new Day6();
@@ -32,5 +43,16 @@ class Day6Test {
         ProblemInput input = ProblemInput.fromInputStream(new FileInputStream(inputFile));
         // THEN
         assertEquals(71503, solver.part2(input));
+    }
+
+    @Test
+    void day6SolvesPart2WithMath() throws Exception {
+        // GIVEN
+        Day6 solver = new Day6();
+        // WHEN
+        File inputFile = new File(getClass().getClassLoader().getResource("inputs/6a.txt").getFile());
+        ProblemInput input = ProblemInput.fromInputStream(new FileInputStream(inputFile));
+        // THEN
+        assertEquals(71503, solver.part2WithMath(input));
     }
 }
