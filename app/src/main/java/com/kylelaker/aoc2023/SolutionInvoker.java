@@ -3,14 +3,15 @@ package com.kylelaker.aoc2023;
 import com.kylelaker.aoc2023.annotations.Part;
 
 import java.lang.reflect.Method;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
 
 public class SolutionInvoker {
     public static void invoke(Class<?> solver, ProblemInput input) {
-        Optional<Method> part1 = SolutionFinder.findPart(solver, 1);
-        Optional<Method> part2 = SolutionFinder.findPart(solver, 2);
+        Collection<Method> part1 = SolutionFinder.findParts(solver, 1);
+        Collection<Method> part2 = SolutionFinder.findParts(solver, 2);
         List<Method> parts = Stream.concat(part1.stream(), part2.stream()).toList();
 
         try {

@@ -7,6 +7,7 @@ import org.springframework.context.annotation.ClassPathScanningCandidateComponen
 import org.springframework.core.type.filter.AnnotationTypeFilter;
 
 import java.lang.reflect.Method;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Optional;
 
@@ -28,14 +29,10 @@ public class SolutionFinder {
                 .toList();
     }
 
-    public static Optional<Method> findPart(Class<?> solver, int number) {
-        Method[] methods = solver.getDeclaredMethods();
-        for (Method method : methods) {
+    public static Collection<Method> findParts(Class<?> solver, int number) {
+        return Arrays.stream(solver.getDeclaredMethods()).filter(method -> {
             Part annot = method.getAnnotation(Part.class);
-            if (annot != null && annot.value() == number) {
-                return Optional.of(method);
-            }
-        }
-        return Optional.empty();
+            return annot != null && annot.value() == number;
+        }).toList();
     }
 }
